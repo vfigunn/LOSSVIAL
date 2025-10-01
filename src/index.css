@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Loss Vial S.A. Design System - Professional construction company palette
+All colors MUST be HSL - Corporate construction colors with vial yellow accent
+*/
+
+@layer base {
+  :root {
+    --background: 0 0% 99%;
+    --foreground: 220 15% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 15% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 15% 15%;
+
+    /* Construction primary - Deep construction blue/gray */
+    --primary: 210 25% 25%;
+    --primary-foreground: 0 0% 98%;
+
+    /* Vial yellow - Safety/construction yellow */
+    --vial-yellow: 45 95% 55%;
+    --vial-yellow-foreground: 220 15% 15%;
+
+    /* Professional grays */
+    --secondary: 210 15% 92%;
+    --secondary-foreground: 220 15% 15%;
+
+    --muted: 210 15% 95%;
+    --muted-foreground: 220 10% 45%;
+
+    --accent: 45 95% 55%;
+    --accent-foreground: 220 15% 15%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 210 15% 88%;
+    --input: 210 15% 92%;
+    --ring: 45 95% 55%;
+
+    --radius: 0.5rem;
+
+    /* Construction gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(210 30% 20%));
+    --gradient-vial: linear-gradient(135deg, hsl(var(--vial-yellow)), hsl(50 90% 45%));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary) / 0.95), hsl(220 20% 20% / 0.9));
+    
+    /* Construction shadows */
+    --shadow-construction: 0 10px 30px -10px hsl(var(--primary) / 0.3);
+    --shadow-vial: 0 5px 20px -5px hsl(var(--vial-yellow) / 0.4);
+    --shadow-card: 0 4px 20px -4px hsl(220 15% 25% / 0.1);
+
+    /* Animation transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 220 15% 8%;
+    --foreground: 210 15% 92%;
+
+    --card: 220 15% 10%;
+    --card-foreground: 210 15% 92%;
+
+    --popover: 220 15% 10%;
+    --popover-foreground: 210 15% 92%;
+
+    --primary: 45 95% 55%;
+    --primary-foreground: 220 15% 15%;
+
+    --vial-yellow: 45 95% 60%;
+    --vial-yellow-foreground: 220 15% 15%;
+
+    --secondary: 220 15% 15%;
+    --secondary-foreground: 210 15% 92%;
+
+    --muted: 220 15% 12%;
+    --muted-foreground: 220 10% 65%;
+
+    --accent: 45 95% 55%;
+    --accent-foreground: 220 15% 15%;
+
+    --destructive: 0 62.8% 50%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 15% 18%;
+    --input: 220 15% 15%;
+    --ring: 45 95% 55%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
