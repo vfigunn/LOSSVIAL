@@ -9,11 +9,11 @@ export const AboutSection = () => {
         <div className="text-center mb-16">
           <Badge className="mb-4 bg-vial-yellow text-vial-yellow-foreground">Quiénes Somos</Badge>
           <h2 className="text-3xl md:text-4xl font-bold text-primary mb-6">
-            Una empresa familiar con tradición en obras viales
+            Una empresa familiar con tradición en obras civiles
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
             Loss Vial S.A. nació como una empresa familiar en 1994, con el compromiso de brindar 
-            servicios de calidad en obras viales y movimiento de suelos en Gualeguaychú y la región.
+            servicios de calidad en obras civiles y movimiento de suelos en Gualeguaychú y la región.
           </p>
         </div>
 
@@ -32,7 +32,7 @@ export const AboutSection = () => {
                 con la excelencia y la transparencia en todos nuestros proyectos.
               </p>
               <p>
-                Hoy somos reconocidos como una empresa líder en obras viales, movimiento de suelos 
+                Hoy somos reconocidos como una empresa líder en obras civiles, movimiento de suelos 
                 y demoliciones, con un equipo de profesionales comprometidos y maquinaria de última generación.
               </p>
             </div>
@@ -44,7 +44,7 @@ export const AboutSection = () => {
                 <div className="inline-flex items-center justify-center w-12 h-12 bg-vial-yellow/20 rounded-lg mb-4">
                   <Clock className="h-6 w-6 text-vial-yellow" />
                 </div>
-                <h4 className="font-semibold text-primary mb-2">+25 Años</h4>
+                <h4 className="font-semibold text-primary mb-2">+30 Años</h4>
                 <p className="text-sm text-muted-foreground">de experiencia en el sector</p>
               </CardContent>
             </Card>
@@ -111,7 +111,7 @@ export const AboutSection = () => {
               </div>
               <h4 className="text-xl font-semibold text-primary mb-3">Experiencia</h4>
               <p className="text-muted-foreground">
-                Más de 25 años nos respaldan como líderes en obras viales y movimiento de suelos.
+                Más de 30 años nos respaldan como líderes en obras civiles y movimiento de suelos.
               </p>
             </div>
           </div>

@@ -21,11 +21,11 @@ export const Navigation = () => {
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-2">
               <Phone className="h-4 w-4" />
-              <span>(03446) 42-5994 / 45-4470</span>
+              <span>(03446) 63-2609</span>
             </div>
             <div className="flex items-center gap-2">
               <Mail className="h-4 w-4" />
-              <span>vialoss@hotmail.com</span>
+              <span>lossvial@gmail.com</span>
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -39,7 +39,8 @@ export const Navigation = () => {
       <nav className="container flex items-center justify-between py-4">
         <div className="flex items-center">
           <h1 className="text-2xl font-bold text-primary">
-            Loss Vial <span className="text-vial-yellow">S.A.</span>
+            <a href="#" className=""><img src="src/assets/logo.jpg" alt="" className="h-16 w-35 ml-8"/></a>
+
           </h1>
         </div>
 

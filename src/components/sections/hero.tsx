@@ -26,12 +26,12 @@ export const HeroSection = () => {
       <div className="relative z-10 container text-center text-white">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-            Más de <span className="text-vial-yellow">25 años</span> acompañando el crecimiento de{" "}
+            Más de <span className="text-vial-yellow">30 años</span> acompañando el crecimiento de{" "}
             <span className="text-vial-yellow">Gualeguaychú</span>
           </h1>
           
           <p className="text-xl md:text-2xl mb-8 text-gray-200 max-w-3xl mx-auto">
-            Especialistas en obras viales y movimiento de suelos. 
+            Especialistas en obras civiles y movimiento de suelos. 
             Construyendo infraestructura de calidad para nuestra comunidad.
           </p>
 
@@ -47,7 +47,7 @@ export const HeroSection = () => {
             <Button
               variant="outline"
               size="lg"
-              className="border-white text-white hover:bg-white hover:text-primary px-8 py-4"
+              className="border-white text-black hover:bg-white hover:text-primary px-8 py-4"
               onClick={() => document.getElementById("servicios")?.scrollIntoView({ behavior: "smooth" })}
             >
               Ver Servicios
