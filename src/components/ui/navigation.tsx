@@ -38,9 +38,10 @@ export const Navigation = () => {
       {/* Navegación principal */}
       <nav className="container flex items-center justify-between py-4">
         <div className="flex items-center">
-          <h1 className="text-2xl font-bold text-primary">
-            <a href="#" className=""><img src="./public/assets/logo.jpg" alt="" className="h-16 w-35 ml-8"/></a>
-
+          <h1 className="text-2xl font-bold text-primary flex items-center">
+            <a href="/" className="flex items-center">
+              <img src="/assets/logo.jpg" alt="Loss Vial S.A." className="h-16 ml-2" />
+            </a>
           </h1>
         </div>
 
@@ -127,11 +128,11 @@ export const Navigation = () => {
               <div className="pt-4 border-t border-border space-y-2 text-sm text-muted-foreground">
                 <div className="flex items-center gap-2">
                   <Phone className="h-4 w-4" />
-                  <span>(03446) 42-5994</span>
+                  <span>(03446) 63-2609</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Mail className="h-4 w-4" />
-                  <span>vialoss@hotmail.com</span>
+                  <span>lossvial@gmail.com</span>
                 </div>
               </div>
             </div>
