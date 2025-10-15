@@ -39,7 +39,7 @@ export const Navigation = () => {
       <nav className="container flex items-center justify-between py-4">
         <div className="flex items-center">
           <h1 className="text-2xl font-bold text-primary">
-            <a href="#" className=""><img src="src/assets/logo.jpg" alt="" className="h-16 w-35 ml-8"/></a>
+            <a href="#" className=""><img src="./public/assets/logo.jpg" alt="" className="h-16 w-35 ml-8"/></a>
 
           </h1>
         </div>
