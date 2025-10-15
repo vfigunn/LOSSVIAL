@@ -26,16 +26,16 @@ export const ProjectsSection = () => {
       ]
     },
     {
-      title: "Trabajos en Complejo Amarras",
-      location: "Pueblo Belgrano, Gualeguaychú",
-      year: "2022-2023",
-      category: "Infraestructura Turística",
+      title: "Demolición de Tanque de Agua y Base de Hormigón – Planta Hermann",
+      location: "Gualeguaychú, Entre Ríos",
+      year: "2021",
+      category: "Demoliciones Industriales",
       description: "Obras de infraestructura y movimiento de suelos para el desarrollo del complejo turístico Amarras, incluyendo apertura de calles y preparación de terrenos.",
       highlights: [
-        "Apertura de 1.2 km de calles",
-        "Movimiento de 1,200 m³ de suelos",
-        "Instalación de cordones cuneta",
-        "Proyecto de desarrollo turístico"
+        "Altura del tanque: 17 m",
+        "Volumen demolido: 450 m³",
+        "Material reciclado: 60 %",
+        "Duración: 3 semanaso"
       ]
     },
     {
@@ -49,6 +49,19 @@ export const ProjectsSection = () => {
         "Mantenimiento vial preventivo",
         "Mejoras en espacios públicos",
         "Colaboración a largo plazo"
+      ]
+    },
+    {
+      title: "Terraplenes y Laguna Sanitaria – Granja Porcina Agropecuaria Sur",
+      location: "Zona Rural, Departamento Gualeguaychú",
+      year: "2023-2024",
+      category: "Desarrollo Agroindustrial",
+      description: "Construcción de terraplenes, nivelación y laguna sanitaria para sistema de tratamiento de efluentes. Proyecto realizado junto a la firma Agropecuaria Sur.",
+      highlights: [
+        "Terraplenes de 3 m de altura",
+        "Movimiento de suelo: 3,800 m³",
+        "Obra hidráulica de retención",
+        "Duración: 6 semanas"
       ]
     }
   ];
@@ -146,7 +159,7 @@ export const ProjectsSection = () => {
                 <Button 
                   variant="outline"
                   size="lg"
-                  className="border-white text-white hover:bg-white hover:text-primary"
+                  className="border-white text-black hover:bg-white hover:text-primary"
                 >
                   Ver Más Proyectos
                 </Button>

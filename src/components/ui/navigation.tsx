@@ -30,7 +30,7 @@ export const Navigation = () => {
           </div>
           <div className="flex items-center gap-2">
             <Clock className="h-4 w-4" />
-            <span>Lun-Vie 9:00-13:00 / 16:00-19:30</span>
+            <span>Lun-Vie 9:00-13:00 </span>
           </div>
         </div>
       </div>

@@ -13,26 +13,26 @@ export const Footer = () => {
               Loss Vial <span className="text-vial-yellow">S.A.</span>
             </h3>
             <p className="text-primary-foreground/80 mb-6 max-w-md">
-              Más de 25 años de experiencia en obras viales, movimiento de suelos y demoliciones. 
+              Más de 30 años de experiencia en obras civiles, movimiento de suelos y demoliciones. 
               Empresa familiar comprometida con el crecimiento de Gualeguaychú y la región.
             </p>
             <div className="space-y-3">
               <div className="flex items-center gap-3">
                 <MapPin className="h-4 w-4 text-vial-yellow flex-shrink-0" />
                 <span className="text-sm text-primary-foreground/80">
-                  España 296, Gualeguaychú, Entre Ríos, Argentina
+                  Blvd. Antonio Daneri 919, Gualeguaychú, Entre Ríos, Argentina
                 </span>
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="h-4 w-4 text-vial-yellow flex-shrink-0" />
                 <span className="text-sm text-primary-foreground/80">
-                  (03446) 42-5994 / (03446) 45-4470
+                  (03446) 63-2609 
                 </span>
               </div>
               <div className="flex items-center gap-3">
                 <Mail className="h-4 w-4 text-vial-yellow flex-shrink-0" />
                 <span className="text-sm text-primary-foreground/80">
-                  vialoss@hotmail.com
+                  lossvial@gmail.com
                 </span>
               </div>
             </div>
@@ -59,16 +59,9 @@ export const Footer = () => {
                 <div>
                   <p className="font-medium">Lunes a Viernes</p>
                   <p>9:00 - 13:00</p>
-                  <p>16:00 - 19:30</p>
                 </div>
               </div>
-              <div className="flex items-start gap-2">
-                <Clock className="h-4 w-4 text-vial-yellow mt-0.5 flex-shrink-0" />
-                <div>
-                  <p className="font-medium">Sábados</p>
-                  <p>9:00 - 13:00</p>
-                </div>
-              </div>
+
             </div>
           </div>
         </div>

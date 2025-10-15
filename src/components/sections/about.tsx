@@ -23,7 +23,7 @@ export const AboutSection = () => {
             <div className="space-y-4 text-muted-foreground">
               <p>
                 Fundada en <strong className="text-vial-yellow">1994</strong>, Loss Vial comenzó como un emprendimiento 
-                familiar con raíces profundas en Gualeguaychú, Entre Ríos. Durante más de 25 años, 
+                familiar con raíces profundas en Gualeguaychú, Entre Ríos. Durante más de 30 años, 
                 hemos sido testigos y protagonistas del crecimiento de nuestra ciudad.
               </p>
               <p>

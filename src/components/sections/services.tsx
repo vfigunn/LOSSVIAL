@@ -2,10 +2,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Truck, Building2, Construction, Wrench } from "lucide-react";
-import movimientoSuelos from "@/assets/movimiento-suelos.jpg";
-import demoliciones from "@/assets/demoliciones.jpg";
-import obrasViales from "@/assets/obras-viales.jpg";
-import alquilerMaquinaria from "@/assets/alquiler-maquinaria.jpg";
+import movimientoSuelos from "../../../public/assets/movimiento-suelos.jpeg";
+import demoliciones from "../../../public/assets/demoliciones.png";
+import obrasViales from "../../../public/assets/obras-viales.jpeg";
+import alquilerMaquinaria from "../../../public/assets/alquiler-maquinaria.png";
 
 export const ServicesSection = () => {
   const scrollToContact = () => {
@@ -88,14 +88,14 @@ export const ServicesSection = () => {
           {services.map((service, index) => (
             <Card 
               key={index} 
-              className="shadow-card hover:shadow-construction transition-all duration-300 hover:-translate-y-2 group"
+              className="shadow-card hover:shadow-construction transition-all duration-300 hover:-translate-y-2 group" 
             >
               {service.image && (
                 <div className="relative overflow-hidden rounded-t-lg">
                   <img
                     src={service.image}
                     alt={`Servicio de ${service.title} - Loss Vial S.A.`}
-                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="w-full max-h-38 object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                   <div className="absolute top-4 left-4">
@@ -108,7 +108,7 @@ export const ServicesSection = () => {
               
               <CardHeader className={service.image ? "" : "pt-8"}>
                 {!service.image && (
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-vial-yellow/20 rounded-lg mb-4">
+                  <div className="inline-flex items-center justify-center w-12 h-2 bg-vial-yellow/20 rounded-lg mb-4">
                     <service.icon className="h-6 w-6 text-vial-yellow" />
                   </div>
                 )}
@@ -145,14 +145,14 @@ export const ServicesSection = () => {
               ¿Necesita un servicio específico?
             </h3>
             <p className="text-vial-yellow-foreground/90 mb-6 text-lg">
-              Contamos con más de 25 años de experiencia y la maquinaria necesaria 
+              Contamos con más de 30 años de experiencia y la maquinaria necesaria 
               para llevar a cabo cualquier proyecto de construcción vial.
             </p>
             <Button 
               size="lg"
               variant="secondary"
               onClick={scrollToContact}
-              className="bg-white text-vial-yellow hover:bg-white/90 shadow-lg"
+              className="bg-white text-black hover:bg-white/90 shadow-lg"
             >
               Consultar Ahora
             </Button>

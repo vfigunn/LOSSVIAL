@@ -64,7 +64,7 @@ export const ContactSection = () => {
         `Mensaje: ${validatedData.message}`
       );
       
-      window.open(`https://wa.me/5493446425994?text=${whatsappMessage}`, '_blank');
+      window.open(`https://wa.me/5493446632609?text=${whatsappMessage}`, '_blank');
 
       toast({
         title: "Mensaje enviado correctamente",
@@ -132,7 +132,7 @@ export const ContactSection = () => {
                   <div>
                     <h4 className="font-semibold text-primary mb-1">Dirección</h4>
                     <p className="text-muted-foreground text-sm">
-                      España 296<br />
+                      Boulevar Daneri 919<br />
                       Gualeguaychú, Entre Ríos<br />
                       Argentina
                     </p>
@@ -146,12 +146,9 @@ export const ContactSection = () => {
                   <div>
                     <h4 className="font-semibold text-primary mb-1">Teléfonos</h4>
                     <p className="text-muted-foreground text-sm">
-                      <a href="tel:+5493446425994" className="hover:text-vial-yellow transition-colors">
-                        (03446) 42-5994
+                      <a href="tel:+5493446632609" className="hover:text-vial-yellow transition-colors">
+                        (03446) 63-2609
                       </a><br />
-                      <a href="tel:+5493446454470" className="hover:text-vial-yellow transition-colors">
-                        (03446) 45-4470
-                      </a>
                     </p>
                   </div>
                 </div>
@@ -164,7 +161,7 @@ export const ContactSection = () => {
                     <h4 className="font-semibold text-primary mb-1">Email</h4>
                     <p className="text-muted-foreground text-sm">
                       <a href="mailto:vialoss@hotmail.com" className="hover:text-vial-yellow transition-colors">
-                        vialoss@hotmail.com
+                        lossvial@gmail.com
                       </a>
                     </p>
                   </div>
@@ -178,9 +175,8 @@ export const ContactSection = () => {
                     <h4 className="font-semibold text-primary mb-1">Horarios</h4>
                     <p className="text-muted-foreground text-sm">
                       <strong>Lunes a Viernes:</strong><br />
-                      9:00 - 13:00 / 16:00 - 19:30<br />
-                      <strong>Sábados:</strong><br />
-                      9:00 - 13:00
+                      9:00 - 13:00<br />
+
                     </p>
                   </div>
                 </div>
@@ -268,22 +264,21 @@ export const ContactSection = () => {
                       {formData.message.length}/1000 caracteres
                     </p>
                   </div>
-
-                  <Button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full bg-vial-yellow hover:bg-vial-yellow/90 text-vial-yellow-foreground shadow-vial"
-                  >
-                    {isSubmitting ? (
-                      "Enviando..."
-                    ) : (
-                      <>
-                        <Send className="mr-2 h-4 w-4" />
-                        Enviar Mensaje
-                      </>
-                    )}
-                  </Button>
-
+                    <Button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full bg-vial-yellow hover:bg-vial-yellow/90 text-vial-yellow-foreground shadow-vial"
+                    >
+                      {isSubmitting ? (
+                        "Enviando..."
+                      ) : (
+                        <>
+                          <Send className="mr-2 h-4 w-4" />
+                          Enviar Mensaje
+                        </>
+                      )}
+                    </Button>
+                  
                   <p className="text-xs text-muted-foreground text-center">
                     Al enviar este formulario, será redirigido a WhatsApp para completar el contacto.
                     Sus datos no se almacenan en nuestros servidores.
@@ -295,28 +290,37 @@ export const ContactSection = () => {
         </div>
 
         {/* Map */}
-        <div className="mt-12">
-          <Card className="shadow-card">
-            <CardContent className="p-0">
-              <div className="bg-muted/30 p-6 text-center border-b">
-                <h3 className="text-xl font-bold text-primary mb-2">Nuestra Ubicación</h3>
+        <section>
+          <Card/>
+          <CardContent className="p-0">
+            <div className="bg-muted/30 p-6 text-center border-b mb-12">
+              <h3 className="text-xl font-bold text-primary mb-2">Nuestra Ubicación</h3>
                 <p className="text-muted-foreground">
-                  Nos encontramos en el corazón de Gualeguaychú, sirviendo a toda la región de Entre Ríos
+                Nos encontramos en el corazón de Gualeguaychú, sirviendo a toda la región de Entre Ríos
                 </p>
-              </div>
-              <div className="relative h-96 bg-muted/20 flex items-center justify-center">
-                <div className="text-center">
-                  <MapPin className="h-12 w-12 text-vial-yellow mx-auto mb-4" />
-                  <p className="text-muted-foreground">
-                    <strong>España 296, Gualeguaychú, Entre Ríos</strong><br />
-                    Mapa interactivo disponible próximamente
-                  </p>
+            </div>
+            <div className="container mx-auto">
+              <div className="bg-white rounded-t-lg shadow-lg overflow-hidden mb-12">
+                <div className="aspect-w-16 aspect-h-9 h-[500px]">
+                  <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3346.330214529101!2d-58.5408700239565!3d-32.99506857433655!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95b007e99a2bef41%3A0x99123b9952f1df77!2sBlvd.%20Antonio%20Daneri%20919%2C%20E2820%20Gualeguaych%C3%BA%2C%20Entre%20R%C3%ADos!5e0!3m2!1ses-419!2sar!4v1760565184183!5m2!1ses-419!2sar" 
+                    width="600" 
+                    height="450" 
+                    style={{ border: 0 }} 
+                    allowFullScreen 
+                    loading="lazy" 
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Ubicación de Loss Vial S.A. en Gualeguaychú, Entre Ríos"
+                    className="w-full h-full"
+                  ></iframe>
                 </div>
               </div>
+            </div>
             </CardContent>
-          </Card>
-        </div>
+        <Card/>
+        </section>
       </div>
     </section>
   );
 };
+
