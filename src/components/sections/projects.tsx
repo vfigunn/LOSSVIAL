@@ -30,7 +30,7 @@ export const ProjectsSection = () => {
       location: "Gualeguaychú, Entre Ríos",
       year: "2021",
       category: "Demoliciones Industriales",
-      description: "Obras de infraestructura y movimiento de suelos para el desarrollo del complejo turístico Amarras, incluyendo apertura de calles y preparación de terrenos.",
+      description: "Proyecto de demolición controlada de estructuras de hormigón y tanque elevado de 17 m de altura. Se utilizaron técnicas de impacto y excavación segura.",
       highlights: [
         "Altura del tanque: 17 m",
         "Volumen demolido: 450 m³",
@@ -62,6 +62,32 @@ export const ProjectsSection = () => {
         "Movimiento de suelo: 3,800 m³",
         "Obra hidráulica de retención",
         "Duración: 6 semanas"
+      ]
+    },
+    {
+      title: "Relleno de Planta Potabilizadora",
+      location: "Zona Norte, Gualeguaychú",
+      year: "2024",
+      category: "Infraestructura Urbana Municipal",
+      description: "Trabajo de movimiento y nivelación de suelos para el relleno de la nueva planta potabilizadora. Incluyó tareas de compactación, estabilización y perfilado de superficie.",
+      highlights: [
+        "Área intervenida: 4,000 m²",
+        "Volumen de relleno: 1,500 m³",
+        "Maquinaria: motoniveladora, compactador y camiones volcadores",
+        "Duración: 4 semanas"
+      ]
+    },
+    {
+      title: "Desmonte y Terraplenamiento de 40,000 m² – Emprendimiento Rural",
+      location: "Zona Oeste, Gualeguaychú",
+      year: "2024",
+      category: "Movimiento de Suelos",
+      description: "Obra integral de desmonte, limpieza, nivelación y construcción de terraplén para futura instalación agroindustrial.",
+      highlights: [
+        "Superficie total: 40,000 m²",
+        "Movimiento de tierra: 7,000 m³",
+        "Equipos utilizados: excavadoras, topadoras D6, camiones 6×4",
+        "Duración: 8 semanas"
       ]
     }
   ];

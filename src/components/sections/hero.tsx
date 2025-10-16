@@ -55,7 +55,7 @@ export const HeroSection = () => {
           </div>
 
           {/* Key points */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          <div className="mb-4 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20">
               <div className="flex items-center justify-center mb-4">
                 <Calendar className="h-8 w-8 text-vial-yellow" />
@@ -85,12 +85,12 @@ export const HeroSection = () => {
         </div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Scroll indicator
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
         <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center">
           <div className="w-1 h-3 bg-white rounded-full mt-2 animate-pulse"></div>
         </div>
-      </div>
+      </div> */}
     </section>
   );
 };
