@@ -1,4 +1,4 @@
-import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, Instagram, Youtube, Linkedin } from "lucide-react";
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -42,11 +42,11 @@ export const Footer = () => {
           <div>
             <h4 className="font-semibold mb-4 text-vial-yellow">Servicios</h4>
             <ul className="space-y-2 text-sm text-primary-foreground/80">
-              <li>Movimiento de Suelos</li>
-              <li>Obras Viales</li>
-              <li>Demoliciones Civiles</li>
-              <li>Alquiler de Maquinaria</li>
-              <li>Transporte de Materiales</li>
+              <li><a href="#servicios">Movimiento de Suelos</a></li>
+              <li><a href="#servicios">Obras Viales</a></li>
+              <li><a href="#servicios">Demoliciones Civiles</a></li>
+              <li><a href="#servicios">Alquiler de Maquinaria</a></li>
+              <li><a href="#servicios">Transporte de Materiales</a></li>
             </ul>
           </div>
 
@@ -61,9 +61,26 @@ export const Footer = () => {
                   <p>9:00 - 13:00</p>
                 </div>
               </div>
+            </div>
 
+            <h4 className="mt-8 font-semibold mb-2 text-vial-yellow">Nuestras Redes</h4>
+            <div className="space-y-2 text-sm text-primary-foreground/80">
+                <div className="d-flex items-start gap-2">
+                  <div className="flex items-center gap-2">
+                    <a href="https://www.instagram.com/lossvial" target="_blank" className="font-medium">
+                      <Instagram className="h-8 w-8 text-vial-yellow mt-0.5" />
+                    </a>
+                    <a href="https://www.youtube.com/@LossVial" target="_blank" className="font-medium">
+                      <Youtube className="h-8 w-8 text-vial-yellow mt-0.5" />
+                    </a>
+                    <a href="https://www.linkedin.com/in/loss-vial-2baa0618" target="_blank" className="font-medium">
+                      <Linkedin className="h-8 w-8 text-vial-yellow mt-0.5" />
+                    </a>
+                  </div>
+                </div>
             </div>
           </div>
+
         </div>
 
         <div className="border-t border-primary-foreground/20 mt-8 pt-8">
@@ -76,6 +93,7 @@ export const Footer = () => {
             </div>
           </div>
         </div>
+
       </div>
     </footer>
   );

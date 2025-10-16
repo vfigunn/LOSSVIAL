@@ -35,7 +35,7 @@ export const ProjectsSection = () => {
         "Altura del tanque: 17 m",
         "Volumen demolido: 450 m³",
         "Material reciclado: 60 %",
-        "Duración: 3 semanaso"
+        "Duración: 3 semanas"
       ]
     },
     {
@@ -187,7 +187,7 @@ export const ProjectsSection = () => {
                   size="lg"
                   className="border-white text-black hover:bg-white hover:text-primary"
                 >
-                  Ver Más Proyectos
+                  <a href="#proyectos">Ver Más Proyectos</a>
                 </Button>
               </div>
             </CardContent>
