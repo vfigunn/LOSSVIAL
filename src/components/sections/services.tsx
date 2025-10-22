@@ -94,7 +94,7 @@ export const ServicesSection = () => {
                 <div className="relative overflow-hidden rounded-t-lg">
                   <img
                     src={service.image}
-                    alt={`Servicio de ${service.title} - Loss Vial S.A.`}
+                    alt={`Servicio de ${service.title} - Loss Vial S.A. | Gualeguaychú, Entre Ríos`}
                     className="w-full max-h-38 object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>

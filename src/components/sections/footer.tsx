@@ -43,8 +43,8 @@ export const Footer = () => {
             <h4 className="font-semibold mb-4 text-vial-yellow">Servicios</h4>
             <ul className="space-y-2 text-sm text-primary-foreground/80">
               <li><a href="#servicios">Movimiento de Suelos</a></li>
-              <li><a href="#servicios">Obras Viales</a></li>
-              <li><a href="#servicios">Demoliciones Civiles</a></li>
+              <li><a href="#servicios">Obras Civiles</a></li>
+              <li><a href="#servicios">Demoliciones</a></li>
               <li><a href="#servicios">Alquiler de Maquinaria</a></li>
               <li><a href="#servicios">Transporte de Materiales</a></li>
             </ul>
