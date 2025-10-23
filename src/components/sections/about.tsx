@@ -80,6 +80,11 @@ export const AboutSection = () => {
             </Card>
           </div>
         </div>
+        <div className="flex justify-center mb-16" >
+            <iframe className="rounded-md" width="700" height="395" src="https://www.youtube.com/embed/XJeBJhuTpI4?si=3c4bM9OfC_y38Eat" title="Loss Vial" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" referrerPolicy="strict-origin-when-cross-origin"></iframe>
+        </div>
+
+
 
         {/* Valores */}
         <div className="text-center">
