@@ -81,7 +81,7 @@ export const AboutSection = () => {
           </div>
         </div>
         <div className="flex justify-center mb-16" >
-            <iframe className="rounded-md" width="700" height="395" src="https://www.youtube.com/embed/XJeBJhuTpI4?si=3c4bM9OfC_y38Eat" title="Loss Vial" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" referrerPolicy="strict-origin-when-cross-origin"></iframe>
+            <iframe className="rounded-md" width="700" height="395" src="https://www.youtube.com/embed/o7DbQvI_VdI?si=6h_Z9gNTd0nG7hls" title="Loss Vial" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" referrerPolicy="strict-origin-when-cross-origin"></iframe>
         </div>
 
 
