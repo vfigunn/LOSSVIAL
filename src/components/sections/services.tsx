@@ -1,13 +1,46 @@
+import { useEffect, useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Truck, Building2, Construction, Wrench } from "lucide-react";
+import { Truck, Building2, Construction, Wrench, ArrowRight } from "lucide-react";
 import movimientoSuelos from "../../../public/assets/movimiento-suelos.jpeg";
 import demoliciones from "../../../public/assets/demoliciones.png";
 import obrasViales from "../../../public/assets/obras-viales.jpeg";
 import alquilerMaquinaria from "../../../public/assets/alquiler-maquinaria.png";
 
 export const ServicesSection = () => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const el = entry.target as HTMLElement;
+            const delay = el.getAttribute("data-animate") || "0";
+            setTimeout(() => {
+              el.style.transition = "opacity 0.6s ease-out, transform 0.6s ease-out";
+              el.style.opacity = "1";
+              el.style.transform = "translateY(0)";
+            }, parseInt(delay));
+            observer.unobserve(el);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const elements = sectionRef.current?.querySelectorAll("[data-animate]");
+    elements?.forEach((el) => {
+      const htmlEl = el as HTMLElement;
+      htmlEl.style.opacity = "0";
+      htmlEl.style.transform = "translateY(20px)";
+      observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   const scrollToContact = () => {
     const element = document.getElementById("contacto");
     if (element) {
@@ -71,11 +104,12 @@ export const ServicesSection = () => {
   ];
 
   return (
-    <section id="servicios" className="py-20 bg-background">
+    <section id="servicios" className="py-20 bg-background" ref={sectionRef}>
       <div className="container">
-        <div className="text-center mb-16">
+        {/* Header */}
+        <div className="text-center mb-16" data-animate="0">
           <Badge className="mb-4 bg-vial-yellow text-vial-yellow-foreground">Nuestros Servicios</Badge>
-          <h2 className="text-3xl md:text-4xl font-bold text-primary mb-6">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-6">
             Soluciones integrales en construcción vial
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
@@ -84,22 +118,24 @@ export const ServicesSection = () => {
           </p>
         </div>
 
+        {/* Service cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
           {services.map((service, index) => (
             <Card 
-              key={index} 
-              className="shadow-card hover:shadow-construction transition-all duration-300 hover:-translate-y-2 group" 
+              key={index}
+              data-animate={String(index * 150)}
+              className="shadow-card hover:shadow-construction transition-all duration-300 hover:-translate-y-2 group overflow-hidden border-transparent hover:border-vial-yellow/20" 
             >
               {service.image && (
-                <div className="relative overflow-hidden rounded-t-lg">
+                <div className="relative overflow-hidden">
                   <img
                     src={service.image}
                     alt={`Servicio de ${service.title} - Loss Vial S.A. | Gualeguaychú, Entre Ríos`}
-                    className="w-full max-h-38 object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="w-full max-h-38 object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                   <div className="absolute top-4 left-4">
-                    <div className="inline-flex items-center justify-center w-12 h-12 bg-vial-yellow rounded-lg">
+                    <div className="inline-flex items-center justify-center w-12 h-12 bg-vial-yellow rounded-lg shadow-vial group-hover:scale-110 transition-transform duration-300">
                       <service.icon className="h-6 w-6 text-vial-yellow-foreground" />
                     </div>
                   </div>
@@ -108,43 +144,45 @@ export const ServicesSection = () => {
               
               <CardHeader className={service.image ? "" : "pt-8"}>
                 {!service.image && (
-                  <div className="inline-flex items-center justify-center w-12 h-2 bg-vial-yellow/20 rounded-lg mb-4">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-vial-yellow/20 rounded-lg mb-4">
                     <service.icon className="h-6 w-6 text-vial-yellow" />
                   </div>
                 )}
-                <CardTitle className="text-xl text-primary group-hover:text-vial-yellow transition-colors">
+                <CardTitle className="text-xl text-primary group-hover:text-vial-yellow transition-colors duration-300">
                   {service.title}
                 </CardTitle>
               </CardHeader>
               
               <CardContent>
-                <p className="text-muted-foreground mb-4">{service.description}</p>
+                <p className="text-muted-foreground mb-4 leading-relaxed">{service.description}</p>
                 <ul className="space-y-2 mb-6">
                   {service.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-center text-sm">
-                      <div className="w-2 h-2 bg-vial-yellow rounded-full mr-3 flex-shrink-0"></div>
+                    <li key={featureIndex} className="flex items-center text-sm group/item">
+                      <div className="w-2 h-2 bg-vial-yellow rounded-full mr-3 flex-shrink-0 group-hover/item:scale-125 transition-transform"></div>
                       <span className="text-muted-foreground">{feature}</span>
                     </li>
                   ))}
                 </ul>
                 <Button 
                   variant="outline" 
-                  className="w-full group-hover:bg-vial-yellow group-hover:text-vial-yellow-foreground group-hover:border-vial-yellow transition-colors"
+                  className="w-full group-hover:bg-vial-yellow group-hover:text-vial-yellow-foreground group-hover:border-vial-yellow transition-all duration-300"
                   onClick={scrollToContact}
                 >
                   Solicitar Presupuesto
+                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </CardContent>
             </Card>
           ))}
         </div>
 
-        <div className="text-center">
-          <div className="bg-gradient-vial rounded-2xl p-8 text-center max-w-4xl mx-auto">
-            <h3 className="text-2xl font-bold text-vial-yellow-foreground mb-4">
+        {/* CTA Banner */}
+        <div className="text-center" data-animate="0">
+          <div className="bg-gradient-vial rounded-2xl p-10 text-center max-w-4xl mx-auto shadow-vial hover:shadow-lg transition-shadow duration-300">
+            <h3 className="text-2xl md:text-3xl font-bold text-vial-yellow-foreground mb-4">
               ¿Necesita un servicio específico?
             </h3>
-            <p className="text-vial-yellow-foreground/90 mb-6 text-lg">
+            <p className="text-vial-yellow-foreground/90 mb-6 text-lg max-w-2xl mx-auto">
               Contamos con más de 30 años de experiencia y la maquinaria necesaria 
               para llevar a cabo cualquier proyecto de construcción vial.
             </p>
@@ -152,9 +190,10 @@ export const ServicesSection = () => {
               size="lg"
               variant="secondary"
               onClick={scrollToContact}
-              className="bg-white text-black hover:bg-white/90 shadow-lg"
+              className="bg-white text-black hover:bg-white/90 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
             >
               Consultar Ahora
+              <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
           </div>
         </div>

@@ -69,7 +69,7 @@ export default {
       },
       backgroundImage: {
         "gradient-primary": "var(--gradient-primary)",
-        "gradient-vial": "var(--gradient-vial)", 
+        "gradient-vial": "var(--gradient-vial)",
         "gradient-hero": "var(--gradient-hero)",
       },
       boxShadow: {

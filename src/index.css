@@ -48,7 +48,7 @@ All colors MUST be HSL - Corporate construction colors with vial yellow accent
     --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(210 30% 20%));
     --gradient-vial: linear-gradient(135deg, hsl(var(--vial-yellow)), hsl(50 90% 45%));
     --gradient-hero: linear-gradient(135deg, hsl(var(--primary) / 0.95), hsl(220 20% 20% / 0.9));
-    
+
     /* Construction shadows */
     --shadow-construction: 0 10px 30px -10px hsl(var(--primary) / 0.3);
     --shadow-vial: 0 5px 20px -5px hsl(var(--vial-yellow) / 0.4);

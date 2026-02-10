@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -25,6 +25,7 @@ const contactSchema = z.object({
 });
 
 export const ContactSection = () => {
+  const sectionRef = useRef<HTMLDivElement>(null);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -34,6 +35,36 @@ export const ContactSection = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const el = entry.target as HTMLElement;
+            const delay = el.getAttribute("data-animate") || "0";
+            setTimeout(() => {
+              el.style.transition = "opacity 0.6s ease-out, transform 0.6s ease-out";
+              el.style.opacity = "1";
+              el.style.transform = "translateY(0)";
+            }, parseInt(delay));
+            observer.unobserve(el);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const elements = sectionRef.current?.querySelectorAll("[data-animate]");
+    elements?.forEach((el) => {
+      const htmlEl = el as HTMLElement;
+      htmlEl.style.opacity = "0";
+      htmlEl.style.transform = "translateY(20px)";
+      observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -101,11 +132,12 @@ export const ContactSection = () => {
   };
 
   return (
-    <section id="contacto" className="py-20 bg-background">
+    <section id="contacto" className="py-20 bg-background" ref={sectionRef}>
       <div className="container">
-        <div className="text-center mb-16">
+        {/* Header */}
+        <div className="text-center mb-16" data-animate="0">
           <Badge className="mb-4 bg-vial-yellow text-vial-yellow-foreground">Contacto</Badge>
-          <h2 className="text-3xl md:text-4xl font-bold text-primary mb-6">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-6">
             Póngase en contacto con nosotros
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
@@ -116,17 +148,17 @@ export const ContactSection = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Contact Information */}
-          <div className="lg:col-span-1 space-y-6">
-            <Card className="shadow-card">
+          <div className="lg:col-span-1 space-y-6" data-animate="100">
+            <Card className="shadow-card hover:shadow-construction transition-shadow duration-300">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-primary">
-                  <Building2 className="h-5 w-5" />
+                  <Building2 className="h-5 w-5 text-vial-yellow" />
                   Información de Contacto
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
-                <div className="flex items-start gap-3">
-                  <div className="flex items-center justify-center w-10 h-10 bg-vial-yellow/20 rounded-lg flex-shrink-0">
+                <div className="flex items-start gap-3 group/item">
+                  <div className="flex items-center justify-center w-10 h-10 bg-vial-yellow/20 rounded-lg flex-shrink-0 group-hover/item:bg-vial-yellow/30 transition-colors duration-300">
                     <MapPin className="h-5 w-5 text-vial-yellow" />
                   </div>
                   <div>
@@ -139,8 +171,8 @@ export const ContactSection = () => {
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3">
-                  <div className="flex items-center justify-center w-10 h-10 bg-vial-yellow/20 rounded-lg flex-shrink-0">
+                <div className="flex items-start gap-3 group/item">
+                  <div className="flex items-center justify-center w-10 h-10 bg-vial-yellow/20 rounded-lg flex-shrink-0 group-hover/item:bg-vial-yellow/30 transition-colors duration-300">
                     <Phone className="h-5 w-5 text-vial-yellow" />
                   </div>
                   <div>
@@ -153,30 +185,29 @@ export const ContactSection = () => {
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3">
-                  <div className="flex items-center justify-center w-10 h-10 bg-vial-yellow/20 rounded-lg flex-shrink-0">
+                <div className="flex items-start gap-3 group/item">
+                  <div className="flex items-center justify-center w-10 h-10 bg-vial-yellow/20 rounded-lg flex-shrink-0 group-hover/item:bg-vial-yellow/30 transition-colors duration-300">
                     <Mail className="h-5 w-5 text-vial-yellow" />
                   </div>
                   <div>
                     <h4 className="font-semibold text-primary mb-1">Email</h4>
                     <p className="text-muted-foreground text-sm">
-                      <a href="mailto:vialoss@hotmail.com" className="hover:text-vial-yellow transition-colors">
+                      <a href="mailto:lossvial@gmail.com" className="hover:text-vial-yellow transition-colors">
                         lossvial@gmail.com
                       </a>
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3">
-                  <div className="flex items-center justify-center w-10 h-10 bg-vial-yellow/20 rounded-lg flex-shrink-0">
+                <div className="flex items-start gap-3 group/item">
+                  <div className="flex items-center justify-center w-10 h-10 bg-vial-yellow/20 rounded-lg flex-shrink-0 group-hover/item:bg-vial-yellow/30 transition-colors duration-300">
                     <Clock className="h-5 w-5 text-vial-yellow" />
                   </div>
                   <div>
                     <h4 className="font-semibold text-primary mb-1">Horarios</h4>
                     <p className="text-muted-foreground text-sm">
                       <strong>Lunes a Viernes:</strong><br />
-                      9:00 - 13:00<br />
-
+                      9:00 - 13:00
                     </p>
                   </div>
                 </div>
@@ -185,8 +216,8 @@ export const ContactSection = () => {
           </div>
 
           {/* Contact Form */}
-          <div className="lg:col-span-2">
-            <Card className="shadow-card">
+          <div className="lg:col-span-2" data-animate="200">
+            <Card className="shadow-card hover:shadow-construction transition-shadow duration-300">
               <CardHeader>
                 <CardTitle className="text-primary">Solicitar Presupuesto</CardTitle>
               </CardHeader>
@@ -204,6 +235,7 @@ export const ContactSection = () => {
                         placeholder="Su nombre completo"
                         required
                         maxLength={100}
+                        className="focus:border-vial-yellow focus:ring-vial-yellow/30"
                       />
                     </div>
                     <div className="space-y-2">
@@ -217,6 +249,7 @@ export const ContactSection = () => {
                         placeholder="su.email@ejemplo.com"
                         required
                         maxLength={255}
+                        className="focus:border-vial-yellow focus:ring-vial-yellow/30"
                       />
                     </div>
                   </div>
@@ -231,6 +264,7 @@ export const ContactSection = () => {
                         value={formData.phone}
                         onChange={handleInputChange}
                         placeholder="(03446) 123456"
+                        className="focus:border-vial-yellow focus:ring-vial-yellow/30"
                       />
                     </div>
                     <div className="space-y-2">
@@ -244,6 +278,7 @@ export const ContactSection = () => {
                         placeholder="Motivo de consulta"
                         required
                         maxLength={150}
+                        className="focus:border-vial-yellow focus:ring-vial-yellow/30"
                       />
                     </div>
                   </div>
@@ -256,7 +291,7 @@ export const ContactSection = () => {
                       value={formData.message}
                       onChange={handleInputChange}
                       placeholder="Describa su proyecto o consulta..."
-                      className="min-h-[120px]"
+                      className="min-h-[120px] focus:border-vial-yellow focus:ring-vial-yellow/30"
                       required
                       maxLength={1000}
                     />
@@ -267,13 +302,13 @@ export const ContactSection = () => {
                     <Button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full bg-vial-yellow hover:bg-vial-yellow/90 text-vial-yellow-foreground shadow-vial"
+                      className="w-full bg-vial-yellow hover:bg-vial-yellow/90 text-vial-yellow-foreground shadow-vial hover:shadow-lg transition-all duration-300 group"
                     >
                       {isSubmitting ? (
                         "Enviando..."
                       ) : (
                         <>
-                          <Send className="mr-2 h-4 w-4" />
+                          <Send className="mr-2 h-4 w-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                           Enviar Mensaje
                         </>
                       )}
@@ -290,37 +325,30 @@ export const ContactSection = () => {
         </div>
 
         {/* Map */}
-        <section>
-          <Card/>
-          <CardContent className="p-0">
-            <div className="bg-muted/30 p-6 text-center border-b mb-12">
-              <h3 className="text-xl font-bold text-primary mb-2">Nuestra Ubicación</h3>
-                <p className="text-muted-foreground">
-                Nos encontramos en el corazón de Gualeguaychú, sirviendo a toda la región de Entre Ríos
-                </p>
+        <div className="mt-12" data-animate="0">
+          <div className="bg-muted/30 p-6 text-center rounded-t-xl border-b">
+            <h3 className="text-xl md:text-2xl font-bold text-primary mb-2">Nuestra Ubicación</h3>
+            <p className="text-muted-foreground">
+              Nos encontramos en el corazón de Gualeguaychú, sirviendo a toda la región de Entre Ríos
+            </p>
+          </div>
+          <div className="bg-white rounded-b-xl shadow-construction overflow-hidden">
+            <div className="aspect-w-16 aspect-h-9 h-[500px]">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3346.330214529101!2d-58.5408700239565!3d-32.99506857433655!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95b007e99a2bef41%3A0x99123b9952f1df77!2sBlvd.%20Antonio%20Daneri%20919%2C%20E2820%20Gualeguaych%C3%BA%2C%20Entre%20R%C3%ADos!5e0!3m2!1ses-419!2sar!4v1760565184183!5m2!1ses-419!2sar" 
+                width="600" 
+                height="450" 
+                style={{ border: 0 }} 
+                allowFullScreen 
+                loading="lazy" 
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Ubicación de Loss Vial S.A. en Gualeguaychú, Entre Ríos"
+                className="w-full h-full"
+              ></iframe>
             </div>
-            <div className="container mx-auto">
-              <div className="bg-white rounded-t-lg shadow-lg overflow-hidden mb-12">
-                <div className="aspect-w-16 aspect-h-9 h-[500px]">
-                  <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3346.330214529101!2d-58.5408700239565!3d-32.99506857433655!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95b007e99a2bef41%3A0x99123b9952f1df77!2sBlvd.%20Antonio%20Daneri%20919%2C%20E2820%20Gualeguaych%C3%BA%2C%20Entre%20R%C3%ADos!5e0!3m2!1ses-419!2sar!4v1760565184183!5m2!1ses-419!2sar" 
-                    width="600" 
-                    height="450" 
-                    style={{ border: 0 }} 
-                    allowFullScreen 
-                    loading="lazy" 
-                    referrerPolicy="no-referrer-when-downgrade"
-                    title="Ubicación de Loss Vial S.A. en Gualeguaychú, Entre Ríos"
-                    className="w-full h-full"
-                  ></iframe>
-                </div>
-              </div>
-            </div>
-            </CardContent>
-        <Card/>
-        </section>
+          </div>
+        </div>
       </div>
     </section>
   );
 };
-
