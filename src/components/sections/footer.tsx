@@ -28,7 +28,7 @@ export const Footer = () => {
             {/* Company Info */}
             <div className="col-span-1 md:col-span-2">
               <img
-              src="/assets/logo.jpg"
+              src="/assets/banner_logo.png"
               alt="Loss Vial S.A."
               className="h-16 rounded-lg shadow-md ring-1 ring-vial-yellow/30 mb-4"
             />
