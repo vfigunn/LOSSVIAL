@@ -1,35 +1,11 @@
 import { useEffect, useRef, useState, useCallback } from "react";
+import { Link } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { MACHINES, type Machine } from "@/data/machines";
+import { servicePath } from "@/data/services";
 
-interface MachineData {
-  name: string;
-  image: string;
-  description: string;
-}
-
-const machines: MachineData[] = [
-  {
-    name: "CAT 120",
-    image: "/assets/machines/cat-120.png",
-    description: "Motoniveladora",
-  },
-  {
-    name: "CAT 126",
-    image: "/assets/machines/cat-126.png",
-    description: "Minicargadora",
-  },
-  {
-    name: "CAT 24063",
-    image: "/assets/machines/cat-24063.png",
-    description: "Excavadora Hidráulica",
-  },
-  {
-    name: "CAT 320",
-    image: "/assets/machines/cat-320.png",
-    description: "Excavadora",
-  },
-];
+const machines = MACHINES;
 
 export const MachinesCarouselSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -114,7 +90,11 @@ export const MachinesCarouselSection = () => {
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
             Contamos con maquinaria Caterpillar de última generación para
-            garantizar la máxima eficiencia en cada proyecto.
+            garantizar la máxima eficiencia en cada proyecto. También la ofrecemos en{" "}
+            <Link to={servicePath("alquiler-de-maquinaria-gualeguaychu")} className="font-medium text-primary underline decoration-vial-yellow underline-offset-4 hover:text-vial-yellow">
+              alquiler con operador
+            </Link>
+            .
           </p>
         </div>
 
@@ -180,7 +160,7 @@ export const MachinesCarouselSection = () => {
 // ─── Individual 3D Card ──────────────────────────────────────────────
 
 interface MachineCardProps {
-  machine: MachineData;
+  machine: Machine;
   index: number;
   activeIndex: number;
   total: number;
@@ -309,7 +289,11 @@ const MachineCard = ({
         <div className="relative bg-white dark:bg-muted p-6 md:p-8 flex items-center justify-center h-[260px] md:h-[330px]">
           <img
             src={machine.image}
-            alt={`${machine.name} - ${machine.description} | Loss Vial S.A.`}
+            alt={`${machine.description} Caterpillar ${machine.name} de Loss Vial S.A. para alquiler y movimiento de suelos`}
+            width={800}
+            height={600}
+            loading="lazy"
+            decoding="async"
             className={`w-full h-full object-contain  transition-transform duration-700 ${
               isActive ? "scale-105" : ""
             }`}

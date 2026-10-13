@@ -1,6 +1,6 @@
 {
-  "name": "Loss Vial S.A.",
-  "short_name": "lossvial",
+  "name": "Loss Vial S.A. - Movimiento de suelos y obras civiles en Gualeguaychú",
+  "short_name": "Loss Vial",
   "icons": [
     {
       "src": "/favicon/web-app-manifest-192x192.png",
@@ -15,7 +15,9 @@
       "purpose": "maskable"
     }
   ],
-  "theme_color": "#ffffff",
+  "start_url": "/",
+  "lang": "es-AR",
+  "theme_color": "#30404f",
   "background_color": "#ffffff",
   "display": "standalone"
 }

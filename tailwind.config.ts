@@ -27,6 +27,12 @@ export default {
           DEFAULT: "hsl(var(--vial-yellow))",
           foreground: "hsl(var(--vial-yellow-foreground))",
         },
+        // Verde WhatsApp oscurecido para que el texto blanco cumpla contraste AA.
+        whatsapp: {
+          DEFAULT: "#15803D",
+          dark: "#0E6E35",
+          brand: "#25D366",
+        },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
@@ -98,10 +104,17 @@ export default {
             height: "0",
           },
         },
+        "ping-slow": {
+          "75%, 100%": {
+            transform: "scale(1.35)",
+            opacity: "0",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "ping-slow": "ping-slow 2.5s cubic-bezier(0, 0, 0.2, 1) infinite",
       },
     },
   },

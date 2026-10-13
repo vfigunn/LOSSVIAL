@@ -2,7 +2,12 @@ import { useEffect, useRef } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { MapPin, Calendar, Users, ArrowRight } from "lucide-react";
+import { WhatsAppButton } from "@/components/whatsapp/WhatsAppButton";
+import { WhatsAppIcon } from "@/components/whatsapp/WhatsAppIcon";
+import { MapPin, Calendar, Users, Instagram } from "lucide-react";
+import { BUSINESS } from "@/data/business";
+import { PROJECTS } from "@/data/projects";
+import { projectWaMessage, waLink } from "@/lib/whatsapp";
 
 export const ProjectsSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -37,94 +42,6 @@ export const ProjectsSection = () => {
     return () => observer.disconnect();
   }, []);
 
-  const scrollToContact = () => {
-    const element = document.getElementById("contacto");
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  const projects = [
-    {
-      title: "Nivelación y Relleno de Cancha - Barrio Obrero",
-      location: "Barrio Obrero, Gualeguaychú",
-      year: "2023",
-      category: "Presupuesto Participativo",
-      description: "Proyecto de nivelación y relleno de cancha deportiva en el marco del Presupuesto Participativo municipal. Trabajo integral que incluyó movimiento de suelos, nivelación y compactación.",
-      highlights: [
-        "Área de trabajo: 2,500 m²",
-        "Volumen de relleno: 800 m³",
-        "Beneficiarios: 150 familias",
-        "Duración: 3 semanas"
-      ]
-    },
-    {
-      title: "Demolición de Tanque de Agua y Base de Hormigón – Planta Hermann",
-      location: "Gualeguaychú, Entre Ríos",
-      year: "2021",
-      category: "Demoliciones Industriales",
-      description: "Proyecto de demolición controlada de estructuras de hormigón y tanque elevado de 17 m de altura. Se utilizaron técnicas de impacto y excavación segura.",
-      highlights: [
-        "Altura del tanque: 17 m",
-        "Volumen demolido: 450 m³",
-        "Material reciclado: 60 %",
-        "Duración: 3 semanas"
-      ]
-    },
-    {
-      title: "Obras de Infraestructura Urbana Municipal",
-      location: "Varios sectores de Gualeguaychú",
-      year: "2020-2024",
-      category: "Colaboración Municipal",
-      description: "Colaboración continua con el Municipio de Gualeguaychú en diversas obras de infraestructura urbana, incluyendo mantenimiento vial y mejoras en espacios públicos.",
-      highlights: [
-        "Múltiples sectores de la ciudad",
-        "Mantenimiento vial preventivo",
-        "Mejoras en espacios públicos",
-        "Colaboración a largo plazo"
-      ]
-    },
-    {
-      title: "Terraplenes y Laguna Sanitaria – Granja Porcina Agropecuaria Sur",
-      location: "Zona Rural, Departamento Gualeguaychú",
-      year: "2023-2024",
-      category: "Desarrollo Agroindustrial",
-      description: "Construcción de terraplenes, nivelación y laguna sanitaria para sistema de tratamiento de efluentes. Proyecto realizado junto a la firma Agropecuaria Sur.",
-      highlights: [
-        "Terraplenes de 3 m de altura",
-        "Movimiento de suelo: 3,800 m³",
-        "Obra hidráulica de retención",
-        "Duración: 6 semanas"
-      ]
-    },
-    {
-      title: "Relleno de Planta Potabilizadora",
-      location: "Zona Norte, Gualeguaychú",
-      year: "2024",
-      category: "Infraestructura Urbana Municipal",
-      description: "Trabajo de movimiento y nivelación de suelos para el relleno de la nueva planta potabilizadora. Incluyó tareas de compactación, estabilización y perfilado de superficie.",
-      highlights: [
-        "Área intervenida: 4,000 m²",
-        "Volumen de relleno: 1,500 m³",
-        "Maquinaria: motoniveladora, compactador y camiones volcadores",
-        "Duración: 4 semanas"
-      ]
-    },
-    {
-      title: "Desmonte y Terraplenamiento de 40,000 m² – Emprendimiento Rural",
-      location: "Zona Oeste, Gualeguaychú",
-      year: "2024",
-      category: "Movimiento de Suelos",
-      description: "Obra integral de desmonte, limpieza, nivelación y construcción de terraplén para futura instalación agroindustrial.",
-      highlights: [
-        "Superficie total: 40,000 m²",
-        "Movimiento de tierra: 7,000 m³",
-        "Equipos utilizados: excavadoras, topadoras D6, camiones 6×4",
-        "Duración: 8 semanas"
-      ]
-    }
-  ];
-
   return (
     <section id="proyectos" className="py-20 bg-muted/30" ref={sectionRef}>
       <div className="container">
@@ -135,16 +52,16 @@ export const ProjectsSection = () => {
             Construyendo el futuro de Gualeguaychú
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Conoce algunos de nuestros proyectos más importantes que han contribuido 
-            al desarrollo y crecimiento de nuestra ciudad y la región.
+            Conozca algunas de las obras de movimiento de suelos, demoliciones e infraestructura
+            que realizamos en Gualeguaychú y la región.
           </p>
         </div>
 
         {/* Project cards */}
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 mb-12">
-          {projects.map((project, index) => (
+          {PROJECTS.map((project, index) => (
             <Card
-              key={index}
+              key={project.title}
               data-animate={String(index * 100)}
               className="shadow-card hover:shadow-construction transition-all duration-300 hover:-translate-y-2 group overflow-hidden border-transparent hover:border-vial-yellow/20"
             >
@@ -172,8 +89,8 @@ export const ProjectsSection = () => {
                 <div className="space-y-2 mb-6">
                   <h4 className="font-semibold text-primary text-sm">Datos destacados:</h4>
                   <ul className="space-y-1">
-                    {project.highlights.map((highlight, highlightIndex) => (
-                      <li key={highlightIndex} className="flex items-start text-sm group/item">
+                    {project.highlights.map((highlight) => (
+                      <li key={highlight} className="flex items-start text-sm group/item">
                         <div className="w-2 h-2 bg-vial-yellow rounded-full mr-3 mt-2 flex-shrink-0 group-hover/item:scale-125 transition-transform"></div>
                         <span className="text-muted-foreground">{highlight}</span>
                       </li>
@@ -186,14 +103,16 @@ export const ProjectsSection = () => {
                     <Calendar className="h-4 w-4 text-vial-yellow" />
                     <span className="text-sm">Completado</span>
                   </div>
-                  <Button 
-                    variant="ghost" 
+                  <Button
+                    asChild
+                    variant="ghost"
                     size="sm"
-                    onClick={scrollToContact}
-                    className="text-vial-yellow hover:text-vial-yellow hover:bg-vial-yellow/10 group/btn"
+                    className="text-whatsapp hover:text-whatsapp-dark hover:bg-whatsapp/10"
                   >
-                    Consultar
-                    <ArrowRight className="ml-1 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                    <a href={waLink(projectWaMessage(project.title))} target="_blank" rel="noopener noreferrer">
+                      <WhatsAppIcon className="h-4 w-4" />
+                      Consultar
+                    </a>
                   </Button>
                 </div>
               </CardContent>
@@ -214,21 +133,17 @@ export const ProjectsSection = () => {
                 estamos preparados para hacer realidad su visión.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button 
-                  variant="secondary"
-                  size="lg"
-                  onClick={scrollToContact}
-                  className="bg-vial-yellow text-vial-yellow-foreground hover:bg-vial-yellow/90 hover:scale-105 transition-all duration-300"
-                >
-                  Solicitar Presupuesto
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-                <Button 
+                <WhatsAppButton size="lg" label="Solicitar presupuesto" className="hover:scale-105" />
+                <Button
+                  asChild
                   variant="outline"
                   size="lg"
                   className="border-white text-black hover:font-bold hover:shadow-lg hover:shadow-black hover:scale-105 hover:bg-white hover:text-primary transition-all duration-300"
                 >
-                  <a href="#proyectos">Ver Más Proyectos</a>
+                  <a href={BUSINESS.social.instagram} target="_blank" rel="noopener noreferrer">
+                    <Instagram className="h-5 w-5" />
+                    Ver más obras en Instagram
+                  </a>
                 </Button>
               </div>
             </CardContent>

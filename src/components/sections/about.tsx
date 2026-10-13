@@ -67,8 +67,9 @@ export const AboutSection = () => {
                 con la excelencia y la transparencia en todos nuestros proyectos.
               </p>
               <p>
-                Hoy somos reconocidos como una empresa líder en obras civiles, movimiento de suelos 
-                y demoliciones, con un equipo de profesionales comprometidos y maquinaria de última generación.
+                Hoy somos reconocidos como una empresa líder en movimiento de suelos, obras civiles
+                y demoliciones en Gualeguaychú y alrededores, con un equipo de profesionales comprometidos
+                y maquinaria de última generación.
               </p>
             </div>
           </div>
@@ -118,10 +119,18 @@ export const AboutSection = () => {
 
         {/* Video */}
         <div className="flex justify-center mb-16" data-animate="0">
-          <div className="relative rounded-xl overflow-hidden shadow-construction">
-            <video className="rounded-xl" width="1050" height="595" controls>
+          <div className="relative w-full max-w-[1050px] rounded-xl overflow-hidden shadow-construction">
+            <video
+              className="rounded-xl w-full h-auto"
+              width="1050"
+              height="590"
+              controls
+              preload="none"
+              poster="/assets/video-poster.webp"
+              aria-label="Video institucional de Loss Vial S.A."
+            >
               <source src="/assets/Loss_vial.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
+              Su navegador no puede reproducir este video.
             </video>
           </div>
         </div>

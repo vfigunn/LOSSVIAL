@@ -1,12 +1,12 @@
 import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Truck, Building2, Construction, Wrench, ArrowRight } from "lucide-react";
-import movimientoSuelos from "../../../public/assets/movimiento-suelos.jpeg";
-import demoliciones from "../../../public/assets/demoliciones.png";
-import obrasViales from "../../../public/assets/obras-viales.jpeg";
-import alquilerMaquinaria from "../../../public/assets/alquiler-maquinaria.png";
+import { WhatsAppButton } from "@/components/whatsapp/WhatsAppButton";
+import { ArrowRight, MessageCircleQuestion } from "lucide-react";
+import { SERVICES, servicePath } from "@/data/services";
+import { serviceWaMessage } from "@/lib/whatsapp";
 
 export const ServicesSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -41,68 +41,6 @@ export const ServicesSection = () => {
     return () => observer.disconnect();
   }, []);
 
-  const scrollToContact = () => {
-    const element = document.getElementById("contacto");
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  const services = [
-    {
-      icon: Truck,
-      title: "Movimiento de Suelos y Excavaciones",
-      description: "Servicios especializados en nivelaciones, rellenos y limpieza de terrenos con maquinaria de última generación.",
-      image: movimientoSuelos,
-      features: [
-        "Nivelaciones de terrenos",
-        "Rellenos y compactación",
-        "Limpieza de terrenos",
-        "Excavaciones profundas",
-        "Preparación de fundaciones"
-      ]
-    },
-    {
-      icon: Building2,
-      title: "Demoliciones Civiles Urbanas",
-      description: "Demoliciones seguras y controladas de estructuras civiles en áreas urbanas, con todas las medidas de seguridad.",
-      image: demoliciones,
-      features: [
-        "Demolición de estructuras",
-        "Retiro de escombros",
-        "Medidas de seguridad",
-        "Permisos municipales",
-        "Limpieza post-demolición"
-      ]
-    },
-    {
-      icon: Construction,
-      title: "Obras Viales",
-      description: "Construcción y mantenimiento de infraestructura vial: calles, cordones cuneta, badenes y más.",
-      image: obrasViales,
-      features: [
-        "Apertura de calles",
-        "Cordones cuneta",
-        "Construcción de badenes",
-        "Mantenimiento vial",
-        "Señalización urbana"
-      ]
-    },
-    {
-      icon: Wrench,
-      title: "Alquiler de Maquinaria y Transporte",
-      description: "Alquiler de maquinaria especializada y servicios de transporte de materiales para construcción.",
-      image: alquilerMaquinaria,
-      features: [
-        "Alquiler de excavadoras",
-        "Transporte de materiales",
-        "Operadores certificados",
-        "Mantenimiento incluido",
-        "Disponibilidad 24/7"
-      ]
-    }
-  ];
-
   return (
     <section id="servicios" className="py-20 bg-background" ref={sectionRef}>
       <div className="container">
@@ -110,70 +48,87 @@ export const ServicesSection = () => {
         <div className="text-center mb-16" data-animate="0">
           <Badge className="mb-4 bg-vial-yellow text-vial-yellow-foreground">Nuestros Servicios</Badge>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-6">
-            Soluciones integrales en construcción vial
+            Movimiento de suelos, obras civiles y más en Gualeguaychú
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Ofrecemos una amplia gama de servicios especializados en obras viales, 
-            movimiento de suelos y demoliciones para satisfacer todas sus necesidades de construcción.
+            Soluciones integrales para particulares, empresas, campos y municipios: excavaciones,
+            nivelación y relleno de terrenos, obras viales, demoliciones, alquiler de maquinaria
+            y venta de tierra en Gualeguaychú y alrededores.
           </p>
         </div>
 
         {/* Service cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-          {services.map((service, index) => (
-            <Card 
-              key={index}
-              data-animate={String(index * 150)}
-              className="shadow-card hover:shadow-construction transition-all duration-300 hover:-translate-y-2 group overflow-hidden border-transparent hover:border-vial-yellow/20" 
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          {SERVICES.map((service, index) => (
+            <Card
+              key={service.slug}
+              data-animate={String(index * 120)}
+              className="flex flex-col shadow-card hover:shadow-construction transition-all duration-300 hover:-translate-y-2 group overflow-hidden border-transparent hover:border-vial-yellow/20"
             >
-              {service.image && (
-                <div className="relative overflow-hidden">
-                  <img
-                    src={service.image}
-                    alt={`Servicio de ${service.title} - Loss Vial S.A. | Gualeguaychú, Entre Ríos`}
-                    className="w-full max-h-38 object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                  <div className="absolute top-4 left-4">
-                    <div className="inline-flex items-center justify-center w-12 h-12 bg-vial-yellow rounded-lg shadow-vial group-hover:scale-110 transition-transform duration-300">
-                      <service.icon className="h-6 w-6 text-vial-yellow-foreground" />
-                    </div>
+              <Link to={servicePath(service.slug)} className="relative block overflow-hidden" tabIndex={-1} aria-hidden="true">
+                <img
+                  src={service.image.src}
+                  alt={service.image.alt}
+                  width={service.image.width}
+                  height={service.image.height}
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                <div className="absolute top-4 left-4">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-vial-yellow rounded-lg shadow-vial group-hover:scale-110 transition-transform duration-300">
+                    <service.icon className="h-6 w-6 text-vial-yellow-foreground" />
                   </div>
                 </div>
-              )}
-              
-              <CardHeader className={service.image ? "" : "pt-8"}>
-                {!service.image && (
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-vial-yellow/20 rounded-lg mb-4">
-                    <service.icon className="h-6 w-6 text-vial-yellow" />
-                  </div>
-                )}
+              </Link>
+
+              <CardHeader>
                 <CardTitle className="text-xl text-primary group-hover:text-vial-yellow transition-colors duration-300">
-                  {service.title}
+                  <Link to={servicePath(service.slug)}>{service.name}</Link>
                 </CardTitle>
               </CardHeader>
-              
-              <CardContent>
-                <p className="text-muted-foreground mb-4 leading-relaxed">{service.description}</p>
+
+              <CardContent className="flex flex-1 flex-col">
+                <p className="text-muted-foreground mb-4 leading-relaxed">{service.summary}</p>
                 <ul className="space-y-2 mb-6">
-                  {service.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-center text-sm group/item">
+                  {service.features.slice(0, 4).map((feature) => (
+                    <li key={feature} className="flex items-center text-sm group/item">
                       <div className="w-2 h-2 bg-vial-yellow rounded-full mr-3 flex-shrink-0 group-hover/item:scale-125 transition-transform"></div>
                       <span className="text-muted-foreground">{feature}</span>
                     </li>
                   ))}
                 </ul>
-                <Button 
-                  variant="outline" 
-                  className="w-full group-hover:bg-vial-yellow group-hover:text-vial-yellow-foreground group-hover:border-vial-yellow transition-all duration-300"
-                  onClick={scrollToContact}
-                >
-                  Solicitar Presupuesto
-                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                </Button>
+                <div className="mt-auto grid grid-cols-1 gap-2">
+                  <WhatsAppButton message={serviceWaMessage(service.waName)} label="Pedir presupuesto" className="w-full" />
+                  <Button asChild variant="outline" className="w-full group/more">
+                    <Link to={servicePath(service.slug)}>
+                      Más sobre {service.shortName.toLowerCase()}
+                      <ArrowRight className="h-4 w-4 group-hover/more:translate-x-1 transition-transform" />
+                    </Link>
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           ))}
+
+          {/* Otro trabajo */}
+          <Card
+            data-animate={String(SERVICES.length * 120)}
+            className="flex flex-col justify-center bg-gradient-primary text-primary-foreground shadow-construction overflow-hidden"
+          >
+            <CardContent className="p-8 text-center">
+              <div className="inline-flex items-center justify-center w-14 h-14 bg-vial-yellow rounded-full mb-5 shadow-vial">
+                <MessageCircleQuestion className="h-7 w-7 text-vial-yellow-foreground" />
+              </div>
+              <h3 className="text-2xl font-bold mb-3">¿Necesita otro trabajo?</h3>
+              <p className="text-primary-foreground/85 mb-6 leading-relaxed">
+                Zanjeo, desmonte, lagunas, tajamares, terraplenes y más. Cuéntenos su proyecto
+                y le respondemos con un presupuesto sin compromiso.
+              </p>
+              <WhatsAppButton label="Consultar por WhatsApp" className="w-full" />
+            </CardContent>
+          </Card>
         </div>
 
         {/* CTA Banner */}
@@ -183,18 +138,14 @@ export const ServicesSection = () => {
               ¿Necesita un servicio específico?
             </h3>
             <p className="text-vial-yellow-foreground/90 mb-6 text-lg max-w-2xl mx-auto">
-              Contamos con más de 30 años de experiencia y la maquinaria necesaria 
-              para llevar a cabo cualquier proyecto de construcción vial.
+              Contamos con más de 30 años de experiencia y la maquinaria necesaria
+              para llevar a cabo cualquier proyecto de movimiento de suelos y obra vial.
             </p>
-            <Button 
+            <WhatsAppButton
               size="lg"
-              variant="secondary"
-              onClick={scrollToContact}
-              className="bg-white text-black hover:bg-white/90 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
-            >
-              Consultar Ahora
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
+              label="Consultar ahora por WhatsApp"
+              className="shadow-lg hover:shadow-xl hover:scale-105"
+            />
           </div>
         </div>
       </div>

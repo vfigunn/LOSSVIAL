@@ -5,36 +5,28 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { useToast } from "@/hooks/use-toast";
-import { 
-  Phone, 
-  Mail, 
-  MapPin, 
-  Clock, 
-  Send,
+import { WhatsAppButton } from "@/components/whatsapp/WhatsAppButton";
+import { WhatsAppIcon } from "@/components/whatsapp/WhatsAppIcon";
+import {
+  Phone,
+  Mail,
+  MapPin,
+  Clock,
   Building2
 } from "lucide-react";
-import { z } from "zod";
+import { BUSINESS } from "@/data/business";
+import { SERVICES } from "@/data/services";
+import { DEFAULT_WA_MESSAGE, waLink } from "@/lib/whatsapp";
 
-const contactSchema = z.object({
-  name: z.string().trim().nonempty({ message: "El nombre es requerido" }).max(100, { message: "Máximo 100 caracteres" }),
-  email: z.string().trim().email({ message: "Email inválido" }).max(255, { message: "Máximo 255 caracteres" }),
-  phone: z.string().trim().optional(),
-  subject: z.string().trim().nonempty({ message: "El asunto es requerido" }).max(150, { message: "Máximo 150 caracteres" }),
-  message: z.string().trim().nonempty({ message: "El mensaje es requerido" }).max(1000, { message: "Máximo 1000 caracteres" })
-});
+const OTHER_SERVICE = "Otro trabajo";
 
 export const ContactSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
-    phone: "",
-    subject: "",
-    message: ""
+    service: "",
+    details: ""
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const { toast } = useToast();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -66,7 +58,7 @@ export const ContactSection = () => {
     return () => observer.disconnect();
   }, []);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -74,61 +66,14 @@ export const ContactSection = () => {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  // Arma el mensaje y abre WhatsApp: no hay envío por servidor.
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
+    const lines = [DEFAULT_WA_MESSAGE, "", `Nombre: ${formData.name.trim()}`];
+    if (formData.service) lines.push(`Servicio: ${formData.service}`);
+    if (formData.details.trim()) lines.push(`Detalle: ${formData.details.trim()}`);
 
-    try {
-      // Validate form data
-      const validatedData = contactSchema.parse(formData);
-      
-      // Simulate form submission (replace with actual API call)
-      await new Promise(resolve => setTimeout(resolve, 1000));
-
-      // Create WhatsApp message
-      const whatsappMessage = encodeURIComponent(
-        `Hola Loss Vial S.A., me contacto desde su sitio web.\n\n` +
-        `Nombre: ${validatedData.name}\n` +
-        `Email: ${validatedData.email}\n` +
-        `Teléfono: ${validatedData.phone || 'No proporcionado'}\n` +
-        `Asunto: ${validatedData.subject}\n\n` +
-        `Mensaje: ${validatedData.message}`
-      );
-      
-      window.open(`https://wa.me/5493446632609?text=${whatsappMessage}`, '_blank');
-
-      toast({
-        title: "Mensaje enviado correctamente",
-        description: "Nos pondremos en contacto con usted a la brevedad.",
-      });
-
-      // Reset form
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        subject: "",
-        message: ""
-      });
-
-    } catch (error) {
-      if (error instanceof z.ZodError) {
-        const firstError = error.errors[0];
-        toast({
-          title: "Error en el formulario",
-          description: firstError.message,
-          variant: "destructive",
-        });
-      } else {
-        toast({
-          title: "Error al enviar mensaje",
-          description: "Por favor, intente nuevamente.",
-          variant: "destructive",
-        });
-      }
-    } finally {
-      setIsSubmitting(false);
-    }
+    window.open(waLink(lines.join("\n")), "_blank", "noopener,noreferrer");
   };
 
   return (
@@ -158,15 +103,15 @@ export const ContactSection = () => {
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="flex items-start gap-3 group/item">
-                  <div className="flex items-center justify-center w-10 h-10 bg-vial-yellow/20 rounded-lg flex-shrink-0 group-hover/item:bg-vial-yellow/30 transition-colors duration-300">
-                    <MapPin className="h-5 w-5 text-vial-yellow" />
+                  <div className="flex items-center justify-center w-10 h-10 bg-whatsapp/15 rounded-lg flex-shrink-0">
+                    <WhatsAppIcon className="h-5 w-5 text-whatsapp" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-primary mb-1">Dirección</h4>
+                    <h4 className="font-semibold text-primary mb-1">WhatsApp</h4>
                     <p className="text-muted-foreground text-sm">
-                      Boulevar Daneri 919<br />
-                      Gualeguaychú, Entre Ríos<br />
-                      Argentina
+                      <a href={waLink()} target="_blank" rel="noopener noreferrer" className="hover:text-whatsapp transition-colors">
+                        {BUSINESS.phoneDisplay}
+                      </a>
                     </p>
                   </div>
                 </div>
@@ -176,11 +121,25 @@ export const ContactSection = () => {
                     <Phone className="h-5 w-5 text-vial-yellow" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-primary mb-1">Teléfonos</h4>
+                    <h4 className="font-semibold text-primary mb-1">Teléfono</h4>
                     <p className="text-muted-foreground text-sm">
-                      <a href="tel:+5493446632609" className="hover:text-vial-yellow transition-colors">
-                        (03446) 63-2609
-                      </a><br />
+                      <a href={`tel:${BUSINESS.phoneTel}`} className="hover:text-vial-yellow transition-colors">
+                        {BUSINESS.phoneDisplay}
+                      </a>
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3 group/item">
+                  <div className="flex items-center justify-center w-10 h-10 bg-vial-yellow/20 rounded-lg flex-shrink-0 group-hover/item:bg-vial-yellow/30 transition-colors duration-300">
+                    <MapPin className="h-5 w-5 text-vial-yellow" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-primary mb-1">Dirección</h4>
+                    <p className="text-muted-foreground text-sm">
+                      {BUSINESS.address.street}<br />
+                      {BUSINESS.address.city}, {BUSINESS.address.region}<br />
+                      {BUSINESS.address.countryName}
                     </p>
                   </div>
                 </div>
@@ -192,8 +151,8 @@ export const ContactSection = () => {
                   <div>
                     <h4 className="font-semibold text-primary mb-1">Email</h4>
                     <p className="text-muted-foreground text-sm">
-                      <a href="mailto:lossvial@gmail.com" className="hover:text-vial-yellow transition-colors">
-                        lossvial@gmail.com
+                      <a href={`mailto:${BUSINESS.email}`} className="hover:text-vial-yellow transition-colors">
+                        {BUSINESS.email}
                       </a>
                     </p>
                   </div>
@@ -206,8 +165,8 @@ export const ContactSection = () => {
                   <div>
                     <h4 className="font-semibold text-primary mb-1">Horarios</h4>
                     <p className="text-muted-foreground text-sm">
-                      <strong>Lunes a Viernes:</strong><br />
-                      9:00 - 13:00
+                      <strong>{BUSINESS.hours.label}:</strong><br />
+                      {BUSINESS.hours.range}
                     </p>
                   </div>
                 </div>
@@ -222,101 +181,80 @@ export const ContactSection = () => {
                 <CardTitle className="text-primary">Solicitar Presupuesto</CardTitle>
               </CardHeader>
               <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Contacto directo */}
+                <div className="mb-8 flex flex-col sm:flex-row items-center justify-between gap-4 rounded-xl border border-whatsapp/30 bg-whatsapp/5 p-5">
+                  <div className="text-center sm:text-left">
+                    <p className="font-semibold text-primary">¿Más rápido? Escríbanos directo por WhatsApp</p>
+                    <p className="text-sm text-muted-foreground">Le respondemos con un presupuesto sin compromiso.</p>
+                  </div>
+                  <WhatsAppButton label="Abrir WhatsApp" className="w-full sm:w-auto shrink-0" />
+                </div>
+
+                <p className="mb-4 text-sm text-muted-foreground">
+                  O complete estos datos y le armamos el mensaje:
+                </p>
+
+                <form onSubmit={handleSubmit} className="space-y-5">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <Label htmlFor="name">Nombre completo *</Label>
+                      <Label htmlFor="name">Nombre *</Label>
                       <Input
                         id="name"
                         name="name"
                         type="text"
+                        autoComplete="name"
                         value={formData.name}
                         onChange={handleInputChange}
-                        placeholder="Su nombre completo"
+                        placeholder="Su nombre"
                         required
                         maxLength={100}
                         className="focus:border-vial-yellow focus:ring-vial-yellow/30"
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="email">Email *</Label>
-                      <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        value={formData.email}
+                      <Label htmlFor="service">Servicio</Label>
+                      <select
+                        id="service"
+                        name="service"
+                        value={formData.service}
                         onChange={handleInputChange}
-                        placeholder="su.email@ejemplo.com"
-                        required
-                        maxLength={255}
-                        className="focus:border-vial-yellow focus:ring-vial-yellow/30"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="phone">Teléfono</Label>
-                      <Input
-                        id="phone"
-                        name="phone"
-                        type="tel"
-                        value={formData.phone}
-                        onChange={handleInputChange}
-                        placeholder="(03446) 123456"
-                        className="focus:border-vial-yellow focus:ring-vial-yellow/30"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="subject">Asunto *</Label>
-                      <Input
-                        id="subject"
-                        name="subject"
-                        type="text"
-                        value={formData.subject}
-                        onChange={handleInputChange}
-                        placeholder="Motivo de consulta"
-                        required
-                        maxLength={150}
-                        className="focus:border-vial-yellow focus:ring-vial-yellow/30"
-                      />
+                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base md:text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus:border-vial-yellow"
+                      >
+                        <option value="">Seleccione un servicio</option>
+                        {SERVICES.map((service) => (
+                          <option key={service.slug} value={service.shortName}>
+                            {service.shortName}
+                          </option>
+                        ))}
+                        <option value={OTHER_SERVICE}>{OTHER_SERVICE}</option>
+                      </select>
                     </div>
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="message">Mensaje *</Label>
+                    <Label htmlFor="details">Detalle (opcional)</Label>
                     <Textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
+                      id="details"
+                      name="details"
+                      value={formData.details}
                       onChange={handleInputChange}
-                      placeholder="Describa su proyecto o consulta..."
-                      className="min-h-[120px] focus:border-vial-yellow focus:ring-vial-yellow/30"
-                      required
-                      maxLength={1000}
+                      placeholder="Ubicación, medidas aproximadas, plazos..."
+                      className="min-h-[96px] focus:border-vial-yellow focus:ring-vial-yellow/30"
+                      maxLength={600}
                     />
-                    <p className="text-xs text-muted-foreground text-right">
-                      {formData.message.length}/1000 caracteres
-                    </p>
                   </div>
-                    <Button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="w-full bg-vial-yellow hover:bg-vial-yellow/90 text-vial-yellow-foreground shadow-vial hover:shadow-lg transition-all duration-300 group"
-                    >
-                      {isSubmitting ? (
-                        "Enviando..."
-                      ) : (
-                        <>
-                          <Send className="mr-2 h-4 w-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                          Enviar Mensaje
-                        </>
-                      )}
-                    </Button>
-                  
+
+                  <Button
+                    type="submit"
+                    size="lg"
+                    className="w-full bg-whatsapp hover:bg-whatsapp-dark text-white font-semibold shadow-md hover:shadow-lg transition-all duration-300 [&_svg]:size-5"
+                  >
+                    <WhatsAppIcon />
+                    Enviar por WhatsApp
+                  </Button>
+
                   <p className="text-xs text-muted-foreground text-center">
-                    Al enviar este formulario, será redirigido a WhatsApp para completar el contacto.
-                    Sus datos no se almacenan en nuestros servidores.
+                    Se abrirá WhatsApp con su mensaje listo para enviar. Sus datos no se almacenan en este sitio.
                   </p>
                 </form>
               </CardContent>

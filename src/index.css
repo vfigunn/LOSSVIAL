@@ -115,6 +115,11 @@ All colors MUST be HSL - Corporate construction colors with vial yellow accent
     @apply border-border;
   }
 
+  /* Que el header fijo no tape el título al ir a una sección (#contacto, etc.) */
+  html {
+    scroll-padding-top: 7rem;
+  }
+
   body {
     @apply bg-background text-foreground;
   }
