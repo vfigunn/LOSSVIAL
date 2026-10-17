@@ -13,7 +13,7 @@ export const HOME_FAQS: Faq[] = [
   },
   {
     question: "¿Cómo pido un presupuesto?",
-    answer: `La forma más rápida es escribirnos por WhatsApp al ${BUSINESS.phoneDisplay} contándonos qué trabajo necesita, dónde es y, si puede, con algunas fotos. El presupuesto es sin compromiso.`,
+    answer: `La forma más rápida es escribirnos por WhatsApp al ${BUSINESS.budgetPhoneDisplay} contándonos qué trabajo necesita, dónde es y, si puede, con algunas fotos. El presupuesto es sin compromiso.`,
   },
   {
     question: "¿Trabajan para particulares?",

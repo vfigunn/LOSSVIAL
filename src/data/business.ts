@@ -8,10 +8,13 @@ export const BUSINESS = {
   shortName: "Loss Vial",
   foundingYear: 1994,
   saYear: 2023,
-  phoneDisplay: "(03446) 63-2609",
-  phoneTel: "+5493446632609",
-  phoneSchema: "+54 9 3446 63-2609",
+  // Presupuestos: WhatsApp y consultas comerciales.
+  budgetPhoneDisplay: "(03446) 63-2609",
   whatsappNumber: "5493446632609",
+  // Contacto, soporte y administración: llamadas y datos estructurados (JSON-LD).
+  phoneDisplay: "(03446) 61-4850",
+  phoneTel: "+5493446614850",
+  phoneSchema: "+54 9 3446 61-4850",
   email: "lossvial@gmail.com",
   address: {
     street: "Blvd. Antonio Daneri 919",
