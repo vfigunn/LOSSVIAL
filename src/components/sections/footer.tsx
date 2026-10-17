@@ -62,7 +62,7 @@ export const Footer = () => {
                 <a href={waLink()} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 group/link">
                   <WhatsAppIcon className="h-4 w-4 text-vial-yellow flex-shrink-0" />
                   <span className="text-sm text-primary-foreground/80 group-hover/link:text-vial-yellow transition-colors duration-300">
-                    WhatsApp: {BUSINESS.phoneDisplay}
+                    WhatsApp: {BUSINESS.budgetPhoneDisplay}
                   </span>
                 </a>
                 <a href={`mailto:${BUSINESS.email}`} className="flex items-center gap-3 group/link">

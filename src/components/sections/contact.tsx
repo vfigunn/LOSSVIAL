@@ -110,7 +110,7 @@ export const ContactSection = () => {
                     <h4 className="font-semibold text-primary mb-1">WhatsApp</h4>
                     <p className="text-muted-foreground text-sm">
                       <a href={waLink()} target="_blank" rel="noopener noreferrer" className="hover:text-whatsapp transition-colors">
-                        {BUSINESS.phoneDisplay}
+                        {BUSINESS.budgetPhoneDisplay}
                       </a>
                     </p>
                   </div>
